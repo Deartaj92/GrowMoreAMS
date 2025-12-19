@@ -77,7 +77,16 @@ npm run dev
 
 2. **Push your code to GitHub**
 
-   **Option A: Using the provided push script (Recommended)**
+   **Option A: Using npm script (Recommended - Cross-platform)**
+   ```bash
+   # With custom commit message
+   npm run push "Your commit message"
+   
+   # With default commit message
+   npm run push
+   ```
+   
+   **Option B: Using the provided push scripts**
    
    Windows PowerShell:
    ```powershell
@@ -89,13 +98,7 @@ npm run dev
    push-to-github.bat "Your commit message"
    ```
    
-   The script will automatically:
-   - Check git configuration
-   - Stage all changes
-   - Commit with your message (or default message)
-   - Push to the remote repository
-   
-   **Option B: Manual push**
+   **Option C: Manual push**
    ```bash
    # If you haven't already, initialize git (skip if already done)
    git init
@@ -113,6 +116,8 @@ npm run dev
    git branch -M main
    git push -u origin main
    ```
+   
+   > **Note:** Options A and B will automatically check git configuration, stage all changes, commit with your message (or default), and push to the remote repository.
 
 ### Netlify Deployment
 

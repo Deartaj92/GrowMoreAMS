@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "push": "node scripts/push-to-github.js",
+    "push:github": "node scripts/push-to-github.js"
   },
   "dependencies": {
     "@emotion/cache": "^11.11.0",
