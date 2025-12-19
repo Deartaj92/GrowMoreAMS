@@ -976,7 +976,7 @@ export default function FeeCollectionPage() {
                 Are you sure you want to delete this payment of <strong>Rs. {paymentToDelete.amount.toFixed(2)}</strong>?
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                This will update the challan's paid amount and status. This action cannot be undone.
+                This will update the challan&apos;s paid amount and status. This action cannot be undone.
               </Typography>
             </Box>
           )}

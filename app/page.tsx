@@ -402,7 +402,7 @@ export default function Dashboard() {
           Dashboard
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Welcome back! Here's an overview of your academy
+          Welcome back! Here&apos;s an overview of your academy
         </Typography>
       </Box>
 
@@ -527,7 +527,7 @@ export default function Dashboard() {
                   <CardContent sx={{ p: 2 }}>
                     <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", mb: 1 }}>
                       <Typography variant="caption" color="text.secondary" sx={{ textTransform: "uppercase", fontSize: "0.7rem" }}>
-                        Today's Attendance
+                        Today&apos;s Attendance
                       </Typography>
                       <CalendarMonthIcon fontSize="small" color="action" />
                     </Box>

@@ -268,7 +268,7 @@ export default function ProgramsPage() {
               <TableRow>
                 <TableCell colSpan={7} align="center" sx={{ py: 4 }}>
                   <Typography color="text.secondary">
-                    No programs found. Click "Add Program" to create one.
+                    No programs found. Click &quot;Add Program&quot; to create one.
                   </Typography>
                 </TableCell>
               </TableRow>

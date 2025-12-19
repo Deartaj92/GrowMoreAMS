@@ -359,7 +359,7 @@ export default function SchedulesPage() {
               <TableRow>
                 <TableCell colSpan={8} align="center" sx={{ py: 4 }}>
                   <Typography color="text.secondary">
-                    No schedules found. Click "Add Schedule" to create one.
+                    No schedules found. Click &quot;Add Schedule&quot; to create one.
                   </Typography>
                 </TableCell>
               </TableRow>
