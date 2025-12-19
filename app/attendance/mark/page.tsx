@@ -42,8 +42,8 @@ import { useAuth } from "@/lib/auth/auth-context";
 import { useToast } from "@/lib/toast/toast-context";
 import { Student, Program, Schedule } from "@/lib/supabase/types";
 
-interface StudentWithStatus extends Student {
-  status?: "present" | "absent" | "late" | "excused";
+interface StudentWithStatus extends Omit<Student, "status"> {
+  attendanceStatus?: "present" | "absent" | "late" | "excused";
   remarks?: string;
 }
 
@@ -250,7 +250,7 @@ export default function MarkAttendancePage() {
             const attendance = attendanceMap.get(student.id);
             return {
               ...student,
-              status: (attendance?.status as any) || "present",
+              attendanceStatus: (attendance?.status as any) || "present",
               remarks: attendance?.remarks || "",
             };
           })
@@ -262,16 +262,16 @@ export default function MarkAttendancePage() {
         setHasAttendanceRecords(false);
         // Initialize with default status
         setStudents((prev) =>
-          prev.map((s) => ({ ...s, status: "present" as const, remarks: "" }))
+          prev.map((s) => ({ ...s, attendanceStatus: "present" as const, remarks: "" }))
         );
         // Select all students by default
         setSelectedRows(students.map((s) => s.id));
       }
     } catch (err: any) {
       // Silent fail - just use defaults
-      setStudents((prev) =>
-        prev.map((s) => ({ ...s, status: "present" as const, remarks: "" }))
-      );
+        setStudents((prev) =>
+          prev.map((s) => ({ ...s, attendanceStatus: "present" as const, remarks: "" }))
+        );
       setSelectedRows(students.map((s) => s.id));
     }
   };
@@ -313,15 +313,15 @@ export default function MarkAttendancePage() {
 
   // Statistics
   const totalStudents = filteredStudents.length;
-  const presentCount = filteredStudents.filter((s) => s.status === "present").length;
-  const absentCount = filteredStudents.filter((s) => s.status === "absent").length;
-  const lateCount = filteredStudents.filter((s) => s.status === "late").length;
-  const excusedCount = filteredStudents.filter((s) => s.status === "excused").length;
+  const presentCount = filteredStudents.filter((s) => s.attendanceStatus === "present").length;
+  const absentCount = filteredStudents.filter((s) => s.attendanceStatus === "absent").length;
+  const lateCount = filteredStudents.filter((s) => s.attendanceStatus === "late").length;
+  const excusedCount = filteredStudents.filter((s) => s.attendanceStatus === "excused").length;
 
   // Handle status change
   const handleStatusChange = (studentId: number, status: "present" | "absent" | "late" | "excused") => {
     setStudents((prev) =>
-      prev.map((s) => (s.id === studentId ? { ...s, status } : s))
+      prev.map((s) => (s.id === studentId ? { ...s, attendanceStatus: status } : s))
     );
   };
 
@@ -354,7 +354,7 @@ export default function MarkAttendancePage() {
   const handleMarkAll = (status: "present" | "absent") => {
     setStudents((prev) =>
       prev.map((s) =>
-        selectedRows.includes(s.id) ? { ...s, status } : s
+        selectedRows.includes(s.id) ? { ...s, attendanceStatus: status } : s
       )
     );
   };
@@ -382,7 +382,7 @@ export default function MarkAttendancePage() {
           program_id: selectedProgram || null,
           schedule_id: selectedSchedule || null,
           attendance_date: selectedDate,
-          status: student.status || "absent",
+          status: student.attendanceStatus || "absent",
           remarks: student.remarks || null,
           marked_by: user.full_name || user.username,
         }));
@@ -786,25 +786,25 @@ export default function MarkAttendancePage() {
                       >
                         <StatusButton
                           status="present"
-                          active={student.status === "present"}
+                          active={student.attendanceStatus === "present"}
                           onClick={() => handleStatusChange(student.id, "present")}
                           label="P"
                         />
                         <StatusButton
                           status="absent"
-                          active={student.status === "absent"}
+                          active={student.attendanceStatus === "absent"}
                           onClick={() => handleStatusChange(student.id, "absent")}
                           label="A"
                         />
                         <StatusButton
                           status="late"
-                          active={student.status === "late"}
+                          active={student.attendanceStatus === "late"}
                           onClick={() => handleStatusChange(student.id, "late")}
                           label="Lt"
                         />
                         <StatusButton
                           status="excused"
-                          active={student.status === "excused"}
+                          active={student.attendanceStatus === "excused"}
                           onClick={() => handleStatusChange(student.id, "excused")}
                           label="E"
                         />
