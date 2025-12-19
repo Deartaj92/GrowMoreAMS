@@ -66,6 +66,99 @@ npm run dev
 - **Database**: Supabase
 - **Icons**: Lucide React
 
+## Deployment
+
+### GitHub Setup
+
+1. **Create a new repository on GitHub**
+   - Go to [GitHub](https://github.com/new)
+   - Create a new repository (do not initialize with README, .gitignore, or license)
+   - Copy the repository URL
+
+2. **Push your code to GitHub**
+
+   **Option A: Using the provided push script (Recommended)**
+   
+   Windows PowerShell:
+   ```powershell
+   .\push-to-github.ps1 "Your commit message"
+   ```
+   
+   Windows Command Prompt:
+   ```cmd
+   push-to-github.bat "Your commit message"
+   ```
+   
+   The script will automatically:
+   - Check git configuration
+   - Stage all changes
+   - Commit with your message (or default message)
+   - Push to the remote repository
+   
+   **Option B: Manual push**
+   ```bash
+   # If you haven't already, initialize git (skip if already done)
+   git init
+   
+   # Add all files
+   git add .
+   
+   # Commit your changes
+   git commit -m "Initial commit"
+   
+   # Add the remote repository (if not already set)
+   git remote add origin https://github.com/Deartaj92/GrowMoreAMS.git
+   
+   # Push to GitHub
+   git branch -M main
+   git push -u origin main
+   ```
+
+### Netlify Deployment
+
+1. **Install Netlify CLI (optional, for local testing)**
+   ```bash
+   npm install -g netlify-cli
+   ```
+
+2. **Deploy via Netlify Dashboard**
+   - Go to [Netlify](https://app.netlify.com/)
+   - Click "Add new site" → "Import an existing project"
+   - Connect to GitHub and select your repository
+   - Netlify will auto-detect the build settings from `netlify.toml`
+   - Configure environment variables:
+     - `NEXT_PUBLIC_SUPABASE_URL` - Your Supabase project URL
+     - `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Your Supabase anonymous key
+   - Click "Deploy site"
+
+3. **Build Settings (Auto-detected from netlify.toml)**
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+   - Node version: 18
+
+4. **Environment Variables**
+   Make sure to add these in Netlify Dashboard → Site settings → Environment variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+5. **Deploy via CLI (Alternative)**
+   ```bash
+   # Login to Netlify
+   netlify login
+   
+   # Initialize and deploy
+   netlify init
+   netlify deploy --prod
+   ```
+
+### Post-Deployment
+
+- Your site will be available at `https://your-site-name.netlify.app`
+- Netlify will automatically deploy on every push to the main branch
+- Check the Netlify dashboard for build logs and deployment status
+
 ## License
 
 Private - All rights reserved
